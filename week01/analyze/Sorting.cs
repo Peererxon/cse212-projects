@@ -25,3 +25,5 @@ public static class Sorting {
         }
     }
 }
+
+// my answer: O(N^2)
