@@ -25,7 +25,6 @@ public static class SetsAndMapsTester {
         // 32 & 23
         // 94 & 49
         // 31 & 13
-
         // Problem 2: Degree Summary
         // Sample Test Cases (may not be comprehensive) 
         Console.WriteLine("\n=========== Census TESTS ===========");
@@ -109,7 +108,19 @@ public static class SetsAndMapsTester {
     /// <param name="words">An array of 2-character words (lowercase, no duplicates)</param>
     private static void DisplayPairs(string[] words) {
         // To display the pair correctly use something like:
-        // Console.WriteLine($"{word} & {pair}");
+        var pair = new HashSet<string>();
+        foreach(string word in words)
+        {
+            string inverted = $"{word[1]}{word[0]}";
+            if (pair.Contains(inverted)){
+                
+                Console.WriteLine($"{word} & {inverted}");
+            }else{
+                pair.Add(word);
+            }
+          
+        }
+         
         // Each pair of words should displayed on its own line.
     }
 
