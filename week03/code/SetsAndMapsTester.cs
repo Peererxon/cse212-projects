@@ -29,6 +29,7 @@ public static class SetsAndMapsTester {
         // Sample Test Cases (may not be comprehensive) 
         Console.WriteLine("\n=========== Census TESTS ===========");
         Console.WriteLine(string.Join(", ", SummarizeDegrees("census.txt")));
+        Console.ReadKey();
         // Results may be in a different order:
         // <Dictionary>{[Bachelors, 5355], [HS-grad, 10501], [11th, 1175],
         // [Masters, 1723], [9th, 514], [Some-college, 7291], [Assoc-acdm, 1067],
@@ -113,7 +114,7 @@ public static class SetsAndMapsTester {
         {
             string inverted = $"{word[1]}{word[0]}";
             if (pair.Contains(inverted)){
-                
+
                 Console.WriteLine($"{word} & {inverted}");
             }else{
                 pair.Add(word);
@@ -142,7 +143,14 @@ public static class SetsAndMapsTester {
         var degrees = new Dictionary<string, int>();
         foreach (var line in File.ReadLines(filename)) {
             var fields = line.Split(",");
-            // Todo Problem 2 - ADD YOUR CODE HERE
+            string degreeName = fields[3];
+            if (degrees.ContainsKey(degreeName))
+            {
+                degrees[degreeName] += 1;
+            } else
+            {
+                degrees[degreeName] = 1;
+            }
         }
 
         return degrees;
