@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Text.Json;
 
 public static class SetsAndMapsTester {
@@ -176,8 +177,22 @@ public static class SetsAndMapsTester {
     /// # Problem 3 #
     /// #############
     private static bool IsAnagram(string word1, string word2) {
-        // Todo Problem 3 - ADD YOUR CODE HERE
-        return false;
+       
+        if (word1.Trim().Count() != word2.Trim().Count())
+        {
+            return false;
+        }
+
+        var word1S = word1.ToLower().Trim().ToArray();
+        var word2S = word2.ToLower().Trim().ToArray();
+        IEnumerable<char> intersetccion = word1S.Intersect(word2S);
+
+        if (intersetccion.Count() != word1.Count())
+        {
+            return false;
+        }
+
+        return true;
     }
 
     /// <summary>
