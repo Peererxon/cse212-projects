@@ -30,7 +30,6 @@ public static class SetsAndMapsTester {
         // Sample Test Cases (may not be comprehensive) 
         Console.WriteLine("\n=========== Census TESTS ===========");
         Console.WriteLine(string.Join(", ", SummarizeDegrees("census.txt")));
-        Console.ReadKey();
         // Results may be in a different order:
         // <Dictionary>{[Bachelors, 5355], [HS-grad, 10501], [11th, 1175],
         // [Masters, 1723], [9th, 514], [Some-college, 7291], [Assoc-acdm, 1067],
@@ -263,8 +262,14 @@ public static class SetsAndMapsTester {
         var json = reader.ReadToEnd();
         var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
-        var featureCollection = JsonSerializer.Deserialize<FeatureCollection>(json, options);
-        // 1. Add your code to map the json to the feature collection object
-        // 2. Print out each place a earthquake has happened today
+        //// 1km NE of Pahala, Hawaii - Mag 2.36
+        ////{"type":"Feature","properties":{"mag":4.6,"place":"66 km SSW of Sola, Vanuatu","time":1700255145498,"updated":1700257090040,"tz":null,"url":"https://earthquake.usgs.gov/earthquakes/eventpage/us6000lp7t","detail":"https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us6000lp7t.geojson","felt":null,"cdi":null,"mmi":null,"alert":null,"status":"reviewed","tsunami":0,"sig":326,"net":"us","code":"6000lp7t","ids":",us6000lp7t,","sources":",us,","types":",origin,phase-data,","nst":49,"dmin":6.745,"rms":0.56,"gap":120,"magType":"mb","type":"earthquake","title":"M 4.6 - 66 km SSW of Sola, Vanuatu"},"geometry":{"type":"Point","coordinates":[167.3741,-14.4486,192.563]},"id":"us6000lp7t"},
+
+        var featureCollection = JsonSerializer.Deserialize <FeatureCollection>(json, options);
+
+        foreach( var earthquake in featureCollection.Features)
+        {
+            Console.WriteLine($"{earthquake.Properties.Place} - Mag {earthquake.Properties.Mag}");
+        }
     }
 }
