@@ -15,6 +15,10 @@
 /// then the 'currX' and 'currY' values should be changed.
 /// </summary>
 public class Maze {
+    private static int leftPosition = 0;
+    private static int rightPosition = 1;
+    private static int upPosition = 2;
+    private static int downPosition = 3;
     private readonly Dictionary<ValueTuple<int, int>, bool[]> _mazeMap;
     private int _currX = 1;
     private int _currY = 1;
@@ -29,7 +33,14 @@ public class Maze {
     /// can't move, then display "Can't go that way!"
     /// </summary>
     public void MoveLeft() {
-        // FILL IN CODE
+        bool leftNotAvailable = !this._mazeMap[(_currX, _currY)][leftPosition];
+        if (leftNotAvailable)
+        {
+            Console.WriteLine("Can't go that way");
+            return;
+        }
+
+        this._currY += 1;
     }
 
     /// <summary>
@@ -37,7 +48,14 @@ public class Maze {
     /// can't move, then display "Can't go that way!"
     /// </summary>
     public void MoveRight() {
-        // FILL IN CODE
+        bool rightNotAvailable = !this._mazeMap[(_currX, _currY)][rightPosition];
+        if (rightNotAvailable)
+        {
+            Console.WriteLine("Can't go that way");
+            return;
+        }
+
+        this._currX += 1;
     }
 
     /// <summary>
@@ -45,7 +63,15 @@ public class Maze {
     /// can't move, then display "Can't go that way!"
     /// </summary>
     public void MoveUp() {
-        // FILL IN CODE
+        //left, right, up, down
+        bool upNotAvailable = !this._mazeMap[(_currX, _currY)][upPosition];
+        if (upNotAvailable)
+        {
+            Console.WriteLine("Can't go that way");
+            return;
+        }
+
+        this._currY -= 1;
     }
 
     /// <summary>
@@ -53,7 +79,14 @@ public class Maze {
     /// can't move, then display "Can't go that way!"
     /// </summary>
     public void MoveDown() {
-        // FILL IN CODE
+        bool downNotAvailable = !this._mazeMap[(_currX, _currY)][downPosition];
+        if (downNotAvailable)
+        {
+            Console.WriteLine("Can't go that way");
+            return;
+        }
+
+        this._currY += 1;
     }
 
     public void ShowStatus() {

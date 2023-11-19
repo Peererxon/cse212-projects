@@ -8,6 +8,7 @@
  * GitHub repository, unshared Google Drive folder) is acceptable.
  *
  */
+using System.Diagnostics;
 public class SimpleQueue {
     public static void Run() {
         // Test Cases
@@ -18,7 +19,8 @@ public class SimpleQueue {
         Console.WriteLine("Test 1");
         var queue = new SimpleQueue();
         queue.Enqueue(100);
-        var value = queue.Dequeue();
+        var value = queue.Dequeue() ;
+        Trace.Assert(value == 100, "value should be 100");
         Console.WriteLine(value);
         // Defect(s) Found:
 
@@ -34,10 +36,13 @@ public class SimpleQueue {
         queue.Enqueue(400);
         value = queue.Dequeue();
         Console.WriteLine(value);
+        Trace.Assert(value == 200, "value should be 100");
         value = queue.Dequeue();
         Console.WriteLine(value);
+        Trace.Assert(value == 300, "value should be 100");
         value = queue.Dequeue();
         Console.WriteLine(value);
+        Trace.Assert(value == 400, "value should be 100");
         // Defect(s) Found: 
 
         Console.WriteLine("------------");

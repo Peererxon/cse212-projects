@@ -8,4 +8,10 @@
     <Nullable>disable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="basketball.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="basketball.csv" />
+  </ItemGroup>
 </Project>
