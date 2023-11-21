@@ -188,8 +188,13 @@ public class LinkedList : IEnumerable<int> {
     /// Iterate backward through the Linked List
     /// </summary>
     public IEnumerable Reverse() {
-        // TODO Problem 5
-        yield return 0; // replace this line with the correct yield return statement(s)
+        var curr = _tail;
+
+        while (curr != null)
+        {
+            yield return curr.Data;
+            curr = curr.Prev; // going backward
+        }
     }
 
     public override string ToString() {
