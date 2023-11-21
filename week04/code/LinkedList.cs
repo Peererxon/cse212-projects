@@ -27,7 +27,21 @@ public class LinkedList : IEnumerable<int> {
     /// Insert a new node at the back (i.e. the tail) of the linked list.
     /// </summary>
     public void InsertTail(int value) {
-        // TODO Problem 1
+
+        Node newTailNode = new Node(value);
+        if (_tail == null)
+        {
+            // this scenareo happends when we only have one node in the linked list (there are the head and tail at the same time)
+            _tail = newTailNode;
+            _head = newTailNode;
+            return;
+        }
+
+        // if tail is not empy only the tail will be afected
+        newTailNode.Prev = _tail; 
+        _tail.Next = newTailNode; 
+        _tail = newTailNode;
+        
     }
 
 
@@ -55,7 +69,19 @@ public class LinkedList : IEnumerable<int> {
     /// Remove the last node (i.e. the tail) of the linked list.
     /// </summary>
     public void RemoveTail() {
-        // TODO Problem 2
+
+        if (_tail == _head)
+        {
+            _head = null;
+            _tail = null;
+        } else if ( _tail != null)
+        {
+            _tail.Prev!.Next = null; // disconnect the before last node from the last node
+            _tail = _tail.Prev; //update the tail pointer
+        }
+
+
+       
     }
 
     /// <summary>
@@ -93,14 +119,50 @@ public class LinkedList : IEnumerable<int> {
     /// Remove the first node that contains 'value'.
     /// </summary>
     public void Remove(int value) {
-        // TODO Problem 3
+
+        Node? current = _head;
+
+        while (current != null)
+        {
+            if (current.Data == value)
+            {
+                if ( current == _head)
+                {
+                    RemoveHead();
+                    break;
+                }
+
+                if (current == _tail)
+                {
+                    RemoveTail();
+                    break;
+                }
+
+                //the occurence is not in the extremes of the linked list
+                current.Next!.Prev = current.Prev;
+                current.Prev!.Next = current.Next;
+                break;
+            }
+            current = current.Next;
+        }
     }
 
     /// <summary>
     /// Search for all instances of 'oldValue' and replace the value to 'newValue'.
     /// </summary>
     public void Replace(int oldValue, int newValue) {
-        // TODO Problem 4
+
+        Node? current = _head;
+
+        while (current != null)
+        {
+            if (current.Data == oldValue)
+            {
+                // instance found
+                current.Data = newValue;
+            }
+            current = current.Next;
+        }
     }
 
     /// <summary>
