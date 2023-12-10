@@ -8,6 +8,12 @@ public class Node {
     }
 
     public void Insert(int value) {
+        if (value == Data)
+        {
+            //duplicate found
+            return;
+        }
+
         if (value < Data) {
             // Insert to the left
             if (Left is null)
@@ -25,12 +31,58 @@ public class Node {
     }
 
     public bool Contains(int value) {
-        // TODO Start Problem 2
-        return false;
+        bool valueFound = false;
+        if (value == Data)
+        {
+            valueFound = true;
+            return valueFound;
+        }
+
+        if (value < Data)
+        {
+            // Search to the left
+            if (Left != null)
+            {
+                bool exist = Left.Contains(value);
+                if( exist == true)
+                {
+                    valueFound = true;
+                }
+
+            }
+               
+        }
+        else
+        {
+            // Search to the right
+            if (Right != null)
+            {
+                bool exist = Right.Contains(value);
+                if (exist == true)
+                {
+                    valueFound = true;
+                }
+            }
+               
+                
+        }
+        return valueFound;
     }
 
     public int GetHeight() {
-        // TODO Start Problem 4
-        return 0; // Replace this line with the correct return statement(s)
+        int hightLeft = 0;
+        int hightRight = 0;
+        if (Left != null)
+        {
+            hightLeft = Left.GetHeight();
+
+        }
+
+        if (Right != null)
+        {
+            hightRight = Right.GetHeight();
+        }
+        // 1 represets the actual node
+        return 1 + Math.Max(hightLeft, hightRight);
     }
 }

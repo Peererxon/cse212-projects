@@ -59,13 +59,19 @@ public class BinarySearchTree : IEnumerable<int> {
     public IEnumerable Reverse() {
         var numbers = new List<int>();
         TraverseBackward(_root, numbers);
-        foreach (var number in numbers) {
+        foreach (var number in numbers.Reverse<int>()) {
             yield return number;
         }
     }
 
     private void TraverseBackward(Node? node, List<int> values) {
-        // TODO Problem 3
+        if (node is not null)
+        {
+            TraverseForward(node.Left, values);
+            values.Add(node.Data);
+            TraverseForward(node.Right, values);
+        }
+
     }
 
     /// <summary>
